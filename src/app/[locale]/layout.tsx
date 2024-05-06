@@ -3,6 +3,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import React from 'react';
 import {notFound} from 'next/navigation';
 import Layout from '@/app/[locale]/components/Layout';
+import {Providers} from "@/app/lib/provider";
 
 const inter = Inter({subsets: ['latin']});
 
@@ -37,9 +38,11 @@ export default async function LocaleLayout({
     return (
         <html className="h-full" lang={locale}>
             <body className={`'relative h-full font-sans antialiased bg-white dark:bg-black ${inter.className}`}>
+            <Providers>
                 <NextIntlClientProvider locale={locale} messages={messages}>
                         <Layout>{children}</Layout>
                 </NextIntlClientProvider>
+            </Providers>
             </body>
         </html>
     );
