@@ -1,7 +1,13 @@
+import LanguageSelect from "./LanguageSelect";
+
+
+
 const Header = () => {
+
   return (
     <header>
-     <div>Header</div>
+        <LanguageSelect />
+        <div>Header</div>
     </header>
   );
 }

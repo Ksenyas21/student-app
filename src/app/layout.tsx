@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import React from "react";
-import {NextIntlClientProvider} from "next-intl";
-import Layout from "@/app/[locale]/components/Layout";
 
 export const metadata: Metadata = {
   title: "Student Management System",
