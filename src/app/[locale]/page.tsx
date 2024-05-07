@@ -1,65 +1,49 @@
 "use client"
 import {useTranslations} from "use-intl";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/app/lib/store";
-import {decrement, increment, incrementByAmount} from "@/app/lib/features/counter/counterSlice";
 import {useEffect, useState} from "react";
 import {makeServer} from "@/api/mirage-server";
 import {StudentAttrs} from "@/app/types/students";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "@/app/lib/store";
+import {fetchStudents, updateStudent} from "@/app/lib/features/students/studentsSlice";
+import AddStudentForm from "@/app/[locale]/components/AddStudentForm";
 
 const MainPage = () => {
-    const [user, setUser] = useState<StudentAttrs[]>([]);
     const t = useTranslations()
-    const count = useSelector((state: RootState) => state.counter.value);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
+    const students = useSelector((state: RootState) => state.students.entities);
+    const loading = useSelector((state: RootState) => state.students.loading);
+
+    useEffect(() => {
+        dispatch(fetchStudents());
+    }, [dispatch]);
+
 
     useEffect(() => {
         makeServer();
-        async function fetchStudents() {
-            try {
-                const response = await fetch('/api/students',{
-
-                });
-                if (!response.ok) {
-                    throw new Error('Ошибка загрузки студентов');
-                }
-                const data = await response.json();
-                setUser(data.students);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        fetchStudents();
     },[])
-    console.log(user);
+    const deleteStudent = (student: StudentAttrs) => {
+        console.log('delete', student.id)
+        const newIsActive = !student.isActive;
+        dispatch(updateStudent({ id: student.id.toString(), student: { isActive: newIsActive } }));
+    }
     return (
         <div>
             <h1>{t('label')}</h1>
             <main>
-                <button
-                    onClick={() => dispatch(increment())}
-                >Increment
-                </button>
-                <span>{count}</span>
-                <button
-                    onClick={() => dispatch(decrement())}
-                >Decrement
-                </button>
-                <button
-                    onClick={() => dispatch(incrementByAmount(2))}
-                >Increment by 2
-                </button>
+            <AddStudentForm />
             </main>
             <h1>Студенты</h1>
             <ul>
-                {user?.map((student) => (
+                {loading ? <p>Loading...</p> : students?.map(student =>
                     <li key={student.id}>
-                        <p>Имя: {student.name}</p>
-                        <p>Год рождения: {student.birthYear}</p>
-                        <p>IDNP: {student.idnp}</p>
-                    </li>
-                ))}
+                            <p>Имя: {student.name}</p>
+                            <p>Год рождения: {student.birthYear}</p>
+                            <p>IDNP: {student.idnp}</p>
+                            <p>isActive: {student.isActive ? 'true': 'false'}</p>
+                            <div onClick={() => deleteStudent(student)}>delete</div>
+                     </li>
+                )}
             </ul>
         </div>
     );

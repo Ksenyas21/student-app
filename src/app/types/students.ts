@@ -3,4 +3,5 @@ export interface StudentAttrs {
     name: string;
     birthYear: string;
     idnp: string;
+    isActive: boolean;
 }

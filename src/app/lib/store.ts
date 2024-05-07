@@ -1,11 +1,11 @@
 'use client';
 
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './features/counter/counterSlice'
+import studentsSlice from '@/app/lib/features/students/studentsSlice'
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer
+        students: studentsSlice
     }
 })
 

@@ -10,9 +10,12 @@ export function makeServer() {
         },
 
         seeds(server) {
-            server.create("student", { id: 'o', name: "Buy groceries", birthYear: "1990", idnp: "1234567890123"});
-            server.create("student", { id: '1', name: "sadfgh", birthYear: "1990", idnp: "1234567890123"});
-            server.create("student", { id: '2', name: "Buy gfhnvfbfbv", birthYear: "1990", idnp: "1234567890123"});
+            // @ts-ignore
+            server.create("student", { id: 0, name: "Djon doe", birthYear: "1990", idnp: "1234567890123", isActive: true});
+            // @ts-ignore
+            server.create("student", { id: 1, name: "Ksenia Dolgan", birthYear: "1990", idnp: "1234567890123", isActive: true});
+            // @ts-ignore
+            server.create("student", { id: 2, name: "Max Levchuk ", birthYear: "1990", idnp: "1234567890123", isActive: true});
 
         },
         routes() {
@@ -43,6 +46,6 @@ export function makeServer() {
     });
 }
 
-function validateIDNP(idnp: string): boolean {
+export function validateIDNP(idnp: string): boolean {
     return idnp.length === 13 && /^\d+$/.test(idnp);
 }
