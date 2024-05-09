@@ -11,11 +11,11 @@ export function makeServer() {
 
         seeds(server) {
             // @ts-ignore
-            server.create("student", { id: 0, name: "Djon doe", birthYear: "1990", idnp: "1234567890123", isActive: true});
+            server.create("student", { id: 0, name: "Abram doe", birthday: "1990", idnp: "1234567890123", isActive: true});
             // @ts-ignore
-            server.create("student", { id: 1, name: "Ksenia Dolgan", birthYear: "1990", idnp: "1234567890123", isActive: true});
+            server.create("student", { id: 1, name: "Bruno Dolgan", birthday: "1990", idnp: "1234567890123", isActive: true});
             // @ts-ignore
-            server.create("student", { id: 2, name: "Max Levchuk ", birthYear: "1990", idnp: "1234567890123", isActive: true});
+            server.create("student", { id: 2, name: "Cian Levchuk ", birthday: "1990", idnp: "1234567890123", isActive: true});
 
         },
         routes() {

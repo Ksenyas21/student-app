@@ -7,7 +7,7 @@ import {AppDispatch} from "@/app/lib/store";
 import {validateIDNP} from "@/api/mirage-server";
 
 const AddStudentForm: React.FC = () => {
-    const [student, setStudent] = useState<StudentAttrs>({ id: Math.floor(Math.random() * 100) , name: '', birthYear: '', idnp: '', isActive: true });
+    const [student, setStudent] = useState<StudentAttrs>({ id: Math.floor(Math.random() * 100) , name: '', birthday: '', idnp: '', isActive: true });
     const dispatch = useDispatch<AppDispatch>();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,9 +16,9 @@ const AddStudentForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (student.name && student.birthYear && student.idnp && validateIDNP(student.idnp)) {
+        if (student.name && student.birthday && student.idnp && validateIDNP(student.idnp)) {
             dispatch(addStudent(student));
-            setStudent({ id: 0, name: '', birthYear: '', idnp: '', isActive: true }); // Reset form after submission
+            setStudent({ id: 0, name: '', birthday: '', idnp: '', isActive: true }); // Reset form after submission
         } else {
             alert("Please fill out all fields.");
         }
@@ -37,12 +37,12 @@ const AddStudentForm: React.FC = () => {
                 />
             </div>
             <div>
-                <label htmlFor="birthYear">Birth Year:</label>
+                <label htmlFor="birthday">Birth Year:</label>
                 <input
                     type="text"
-                    id="birthYear"
-                    name="birthYear"
-                    value={student.birthYear}
+                    id="birthday"
+                    name="birthday"
+                    value={student.birthday}
                     onChange={handleChange}
                 />
             </div>

@@ -1,7 +1,7 @@
 export interface StudentAttrs {
     id: number;
     name: string;
-    birthYear: string;
+    birthday: string;
     idnp: string;
     isActive: boolean;
 }
