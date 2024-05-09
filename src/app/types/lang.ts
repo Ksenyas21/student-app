@@ -1,1 +1,4 @@
-export type Lang = "EN" | "RU";
+interface Language {
+    label: string;
+    value: string;
+}

@@ -1,0 +1,8 @@
+@import "layout";
+
+.container {
+  @include box;
+  padding: 25px 20px;
+  width: 100%;
+}
+

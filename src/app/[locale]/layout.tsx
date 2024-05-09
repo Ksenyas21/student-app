@@ -1,4 +1,3 @@
-import {Inter} from 'next/font/google';
 import {NextIntlClientProvider} from 'next-intl';
 import React from 'react';
 import {notFound} from 'next/navigation';

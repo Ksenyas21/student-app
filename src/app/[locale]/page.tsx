@@ -1,7 +1,7 @@
 "use client"
 import {useEffect, useState} from "react";
 import {makeServer} from "@/api/mirage-server";
-import StudentsTable from "@/app/[locale]/components/StudentsTable/StudentsTable";
+import StudentsTable from "@/app/[locale]/components/StudentsTable/students-table";
 
 const MainPage = () => {
 
