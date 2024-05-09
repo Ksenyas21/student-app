@@ -2,10 +2,10 @@ import {Inter} from 'next/font/google';
 import {NextIntlClientProvider} from 'next-intl';
 import React from 'react';
 import {notFound} from 'next/navigation';
-import Layout from '@/app/[locale]/components/Layout';
 import {Providers} from "@/app/lib/provider";
-
-const inter = Inter({subsets: ['latin']});
+import '../styles/globals.css';
+import '../styles/layout.scss';
+import Header from "@/app/[locale]/components/Header";
 
 const locales = ['en', 'ru'];
 
@@ -36,17 +36,22 @@ export default async function LocaleLayout({
     }
 
     return (
-        <html className="h-full" lang={locale}>
-            <body className={`'relative h-full font-sans antialiased bg-white dark:bg-black ${inter.className}`}>
-            <Providers>
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                        <Layout>{children}</Layout>
-                </NextIntlClientProvider>
-            </Providers>
+
+        <html className="h-full" lang="en">
+            <body>
+                <main className="relative flex flex-col min-h-screen background">
+                    <Providers>
+                        <NextIntlClientProvider locale={locale} messages={messages}>
+                            <Header />
+                            {children}
+                        </NextIntlClientProvider>
+                    </Providers>
+                </main>
             </body>
         </html>
     );
 }
+
 export async function generateStaticParams() {
-    return [{ locale: "en" }, { locale: "ru" }];
+    return [{locale: "en"}, {locale: "ru" }];
 }

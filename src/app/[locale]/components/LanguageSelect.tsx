@@ -10,8 +10,8 @@ interface Language {
 }
 
 export const LANGUAGES: Language[] = [
-    { value: 'en', label: 'English' },
-    { value: 'ru', label: 'Русский' }
+    { value: 'en', label: 'EN' },
+    { value: 'ru', label: 'РУС' }
 ];
 
 
@@ -26,23 +26,19 @@ const LanguageSelect = () => {
         router.push(pathName.split(locale)[0], {locale: newLocale});
     }
 
+
+
     return (
         <header>
+            <div className="grid grid-cols-2 divide-x font-mono text-sm text-center font-bold leading-6 rounded-lg shadow-lg overflow-hidden">
             {LANGUAGES.map((language) => (
-                <button
+                <h4 className="p-2 text-black bg-yellow-400 cursor-pointer hover:bg-yellow-100 transition-colors"
                     onClick={() => setLocale(language.value)}
-                    key={language.value}
-                >
-                    {/*<Image*/}
-                    {/*    src={"/svgs/flags/" + language.value + ".svg"}*/}
-                    {/*    width={24}*/}
-                    {/*    height={24}*/}
-                    {/*    alt="language"*/}
-                    {/*/>*/}
-
+                    key={language.value} >
                     {language.label}
-                </button>
+                </h4>
             ))}
+            </div>
         </header>
     );
 }

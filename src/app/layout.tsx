@@ -11,7 +11,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return <html className="h-full" >
-  <body className={`'relative h-full font-sans antialiased bg-white dark:bg-black`}>
+  <body>
   {children}
   </body>
   </html>;
