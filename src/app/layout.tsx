@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -10,9 +10,11 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  return <html className="h-full" >
-  <body>
-  {children}
-  </body>
-  </html>;
+  return (
+      <html className="h-full">
+        <body>
+          {children}
+        </body>
+      </html>
+  );
 }

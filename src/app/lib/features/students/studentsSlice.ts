@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import {StudentAttrs} from "@/app/types/students";
 
-
 interface StudentsState {
     entities: StudentAttrs[];
     loading: boolean;
@@ -45,7 +44,7 @@ export const addStudent = createAsyncThunk<StudentAttrs, StudentAttrs>(
 
 export const updateStudent = createAsyncThunk<StudentAttrs, { id: string; student: Partial<StudentAttrs> }>(
     'students/updateStudent',
-    async ({ id, student }) => {
+    async ({id, student}) => {
         const response = await fetch(`/api/students/${id}`, {
             method: 'PATCH',
             headers: {
