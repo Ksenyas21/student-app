@@ -7,14 +7,15 @@ import "../../styles/studentTable.scss";
 import { fetchStudents } from "@/app/lib/features/students/studentsSlice";
 import MaxWidthWrapper from "@/shared/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import StudentForm from "@/app/[locale]/StudentsTable/dialog/StudentForm";
-import dayjs from "dayjs";
+import { useTranslations } from "use-intl";
 
 const StudentsTable = () => {
   const dispatch = useDispatch<AppDispatch>();
   const students = useSelector((state: RootState) => state.students.entities);
   const [isOpened, setIsOpened] = useState(false);
+  const t = useTranslations("student.page");
 
   useEffect(() => {
     dispatch(fetchStudents());
@@ -25,8 +26,11 @@ const StudentsTable = () => {
       <MaxWidthWrapper>
         <div className="container">
           <Dialog open={isOpened} onOpenChange={setIsOpened}>
-            <div className=" mb-3 w-full flex justify-end">
-              <Button onClick={() => setIsOpened(true)}>Add Student</Button>
+            <div className=" mb-3 w-full flex justify-between">
+              <h1 className="font-bold text-lg">{t("title")}</h1>
+              <Button onClick={() => setIsOpened(true)}>
+                {t("add-student-button")}
+              </Button>
             </div>
             <DialogContent className="sm:max-w-[425px]">
               <StudentForm closeDialog={setIsOpened} />

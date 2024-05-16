@@ -22,6 +22,7 @@ import {
 import * as React from "react";
 import TableFilters from "@/app/[locale]/StudentsTable/table-filters";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "use-intl";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -32,6 +33,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("student.page.table");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -103,7 +105,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {t("no-results")}
                 </TableCell>
               </TableRow>
             )}

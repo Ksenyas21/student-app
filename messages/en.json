@@ -1,3 +1,46 @@
 {
-  "label": "Home Page"
+  "student": {
+    "page": {
+      "title": "Students",
+      "add-student-button": "Add Student",
+      "filters": {
+        "search-label": "Search",
+        "search-placeholder-by-name": "Search by name",
+        "search-placeholder-by-idnp": "Search by IDNP",
+        "date-label-from": "Date From",
+        "date-label-to": "Date To"
+      },
+      "table": {
+        "header": {
+          "id": "ID",
+          "name": "Name",
+          "idnp": "IDNP",
+          "birthday": "Birth Date",
+          "actions": "Actions"
+        },
+        "no-results": "No results found"
+      }
+    },
+    "dialog": {
+      "add-student": "Add Student",
+      "edit-student": "Edit Student",
+        "name": {
+            "label": "Name",
+            "placeholder": "Enter name",
+            "error": "Name is required"
+        },
+        "idnp": {
+            "label": "IDNP",
+            "placeholder": "Enter IDNP",
+            "error": "IDNP must be 13 characters long"
+        },
+        "birthday": {
+            "label": "Birth Date",
+            "placeholder": "Enter birth date",
+            "error": "Wrong date format"
+        },
+        "cancel-button": "Cancel",
+        "save-button": "Save"
+    }
+  }
 }

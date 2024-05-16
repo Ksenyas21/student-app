@@ -1,3 +1,47 @@
 {
-  "label" : "Домашняя страница"
+  "student": {
+    "page": {
+      "title": "Студенты",
+      "add-student-button": "Добавить Студента",
+      "filters": {
+        "search-label": "Поиск",
+        "search-placeholder-by-name": "Поиск по имени",
+        "search-placeholder-by-idnp": "Поиск по ИНДП",
+        "date-label-from": "Дата От",
+        "date-label-to": "Дата До"
+      },
+      "table": {
+            "header": {
+            "id": "Номер",
+            "name": "Имя",
+            "idnp": "ИНДП",
+            "birthday": "Дата Рождения",
+            "actions": "Действия"
+            },
+        "no-results": "Нет результатов"
+        }
+
+    },
+      "dialog": {
+        "add-student": "Добавить Студента",
+        "edit-student": "Редактировать Студента",
+        "name": {
+            "label": "Имя",
+            "placeholder": "Введите Имя",
+            "error": "Имя фамилия не может быть пустым"
+            },
+        "idnp": {
+            "label": "ИНДП",
+            "placeholder": "Введите ИНДП",
+            "error": "ИНДП должен состоять из 13 цифр"
+            },
+        "birthday": {
+            "label": "Дата Рождения",
+            "placeholder": "Введите Дату Рождения",
+            "error": "Неверный формат даты"
+            },
+        "cancel-button": "Отмена",
+        "save-button": "Сохранить"
+      }
+  }
 }

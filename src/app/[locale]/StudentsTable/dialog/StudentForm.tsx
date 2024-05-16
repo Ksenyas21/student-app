@@ -17,17 +17,19 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs from "dayjs";
 import { dateFormat } from "@/lib/utils";
+import { useTranslations } from "use-intl";
 
-const formSchema = z.object({
-  name: z.string().min(1, "Имя фамилия не может быть пустым"),
-  birthday: z.date().or(
-    z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Неверный формат даты")
-      .transform((date) => new Date(date)),
-  ),
-  idnp: z.string().regex(/^\d{13}$/, "IDNP должен состоять из 13 цифр"),
-});
+const formSchema = (t: any) =>
+  z.object({
+    name: z.string().min(1, t("name.error")),
+    birthday: z.date().or(
+      z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, t("birthday.error"))
+        .transform((date) => new Date(date)),
+    ),
+    idnp: z.string().regex(/^\d{13}$/, t("idnp.error")),
+  });
 
 interface FormProps {
   id?: string | null;
@@ -36,7 +38,7 @@ interface FormProps {
 
 const StudentForm = ({ id, closeDialog }: FormProps) => {
   const dispatch = useDispatch<AppDispatch>();
-
+  const t = useTranslations("student.dialog");
   const currentStudent = useSelector(
     (state: RootState) => state.students.currentStudent,
   );
@@ -56,7 +58,7 @@ const StudentForm = ({ id, closeDialog }: FormProps) => {
       idnp: "",
       isActive: true,
     },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema(t)),
   });
 
   const onSubmit: SubmitHandler<StudentAttrs> = (data) => {
@@ -135,44 +137,55 @@ const StudentForm = ({ id, closeDialog }: FormProps) => {
 
   return (
     <div>
-      <h2>{isEdit ? "Edit" : "Add"} Student</h2>
+      <h1 className=" text-lg font-bold mb-5">
+        {isEdit ? t("edit-student") : t("add-student")}
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-3">
           <div>
-            <Label htmlFor="name">Name:</Label>
+            <Label htmlFor="name">{t("name.label")}</Label>
             <Input
               type="text"
               id="name"
+              placeholder={t("name.placeholder")}
               {...register("name", { required: true })}
             />
             <p className="text-sm text-red-600">{errors.name?.message}</p>
           </div>
           <div>
-            <Label htmlFor="birthday">Birth Year:</Label>
+            <Label htmlFor="birthday">{t("birthday.label")}</Label>
             <Input
               type="date"
               id="birthday"
+              placeholder={t("birthday.placeholder")}
               {...register("birthday", { required: true })}
             />
             <p className="text-sm text-red-600">{errors.birthday?.message}</p>
           </div>
           <div>
-            <Label htmlFor="idnp">IDNP:</Label>
+            <Label htmlFor="idnp">{t("idnp.label")}</Label>
             <Input
               type="text"
               id="idnp"
+              placeholder={t("idnp.placeholder")}
               {...register("idnp", { required: true })}
             />
             <p className="text-sm text-red-600">{errors.idnp?.message}</p>
           </div>
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
+          <div className="w-full flex justify-between gap-3 mt-5">
+            <DialogClose asChild className="w-full">
+              <Button type="button" variant="secondary">
+                {t("cancel-button")}
+              </Button>
+            </DialogClose>
+            <Button
+              className="w-full"
+              disabled={!isDirty || !formChanged}
+              type="submit"
+            >
+              {t("save-button")}
             </Button>
-          </DialogClose>
-          <Button disabled={!isDirty || !isValid || !formChanged} type="submit">
-            {isEdit ? "Edit" : "Add"} Student
-          </Button>
+          </div>
         </div>
       </form>
     </div>
