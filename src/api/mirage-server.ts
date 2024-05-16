@@ -1,7 +1,9 @@
 import { createServer, Model } from "miragejs";
 import { StudentAttrs } from "@/app/types/students";
+import dayjs from "dayjs";
+import { dateFormat } from "@/lib/utils";
 
-export function makeServer() {
+export function makeServer({ environment }: { environment: string }) {
   return createServer({
     models: {
       student: Model,
@@ -11,21 +13,21 @@ export function makeServer() {
       server.create("student", {
         id: "0",
         name: "Abram doe",
-        birthday: new Date("03/11/1999"),
+        birthday: dayjs("1999-11-03").format(dateFormat),
         idnp: "1234567890891",
         isActive: false,
       });
       server.create("student", {
         id: "1",
         name: "Bruno Dolgan",
-        birthday: new Date("11/01/2000"),
+        birthday: dayjs("2000-01-11").format(dateFormat),
         idnp: "6703967381902",
         isActive: true,
       });
       server.create("student", {
         id: "2",
         name: "Cian Levchuk ",
-        birthday: new Date("12/03/2005"),
+        birthday: dayjs("2005-03-12").format(dateFormat),
         idnp: "1234567890123",
         isActive: true,
       });
@@ -37,10 +39,16 @@ export function makeServer() {
         return schema.students.all();
       });
 
+      this.get("/students/:id", (schema: any, request: any) => {
+        let id = request.params.id;
+        let student = schema.students.find(id);
+        return student ? student.attrs : { error: "Student not found" };
+      });
+
       this.post("/students", (schema: any, request: any) => {
         let attrs = JSON.parse(request.requestBody) as StudentAttrs;
         if (!validateIDNP(attrs.idnp)) {
-          return { error: "Неверный формат IDNP" };
+          return { error: "Wrong format of IDNP" };
         }
         return schema.students.create(attrs);
       });
@@ -50,7 +58,7 @@ export function makeServer() {
         let id = request.params.id;
         let student = schema.students.find(id);
         if (newAttrs.idnp && !validateIDNP(newAttrs.idnp)) {
-          return { error: "Неверный формат IDNP" };
+          return { error: "Wrong format of IDNP" };
         }
         return student.update(newAttrs);
       });

@@ -1,14 +1,15 @@
-"use client"
-import {useEffect, useState} from "react";
-import {makeServer} from "@/api/mirage-server";
-import StudentsTable from "@/app/[locale]/components/StudentsTable/students-table";
+"use client";
+import { useEffect } from "react";
+import { makeServer } from "@/api/mirage-server";
+import StudentsTable from "@/app/[locale]/StudentsTable/students-table";
 
 const MainPage = () => {
-    useEffect(() => {
-        makeServer();
-    },[])
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      makeServer({ environment: "development" });
+    }
+  }, []);
 
-    return <StudentsTable />
-
-}
+  return <StudentsTable />;
+};
 export default MainPage;

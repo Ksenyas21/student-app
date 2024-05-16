@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
+
 export interface StudentAttrs {
-    id: number;
-    name: string;
-    birthday: string;
-    idnp: string;
-    isActive: boolean;
+  id: string;
+  name: string;
+  birthday: dayjs.ConfigType;
+  idnp: string;
+  isActive: boolean;
 }

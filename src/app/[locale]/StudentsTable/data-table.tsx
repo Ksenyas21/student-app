@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import * as React from "react";
-import TableFilters from "@/app/[locale]/components/StudentsTable/table-filters";
+import TableFilters from "@/app/[locale]/StudentsTable/table-filters";
 import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
