@@ -1,8 +1,8 @@
 "use client";
+
 import * as React from "react";
 import TableFilters from "@/app/[locale]/StudentsTable/table-filters";
 import { cn, dateFormat } from "@/lib/utils";
-import { useTranslations } from "use-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   fetchStudents,
@@ -14,11 +14,10 @@ import dayjs from "dayjs";
 import StudentTableActions from "@/app/[locale]/StudentsTable/student-table-actions";
 
 export const DataTable = () => {
-  const t = useTranslations("student.page.table");
   const dispatch = useDispatch<AppDispatch>();
   const scrollContainerRef = useRef(null);
   const [pageSize] = useState(10);
-  const { entities, loading, error, page, totalPages } = useSelector(
+  const { entities, loading, page, totalPages } = useSelector(
     (state: RootState) => state.students,
   );
   const filteredStudents = useSelector(selectFilteredStudents);
@@ -27,7 +26,7 @@ export const DataTable = () => {
     if (scrollContainerRef.current) {
       const { scrollTop, clientHeight, scrollHeight } =
         scrollContainerRef.current;
-      // Check if scrolled to bottom
+
       if (
         scrollTop + clientHeight >= scrollHeight - 100 &&
         page < totalPages &&
@@ -75,6 +74,7 @@ export const DataTable = () => {
               {dayjs(student.birthday).format(dateFormat)}
             </div>
             <div className="w-1/4">{student.idnp}</div>
+
             <StudentTableActions row={student} />
           </div>
         ))}

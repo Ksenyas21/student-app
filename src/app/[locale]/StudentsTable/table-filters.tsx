@@ -1,9 +1,9 @@
 "use client";
+
 import { Input } from "@/components/ui/input";
 import "../../styles/studentTable.scss";
 import { Label } from "@/components/ui/label";
 import { useTranslations } from "use-intl";
-import { ChangeEvent, useState } from "react";
 import {
   searchByName,
   searchByIdnp,
@@ -15,16 +15,6 @@ import { useDispatch } from "react-redux";
 
 const TableFilters = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
-
-  const handleDateFromChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDateFrom(event.target.value);
-  };
-
-  const handleDateToChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDateTo(event.target.value);
-  };
 
   const t = useTranslations("student.page.filters");
   return (
@@ -68,4 +58,5 @@ const TableFilters = () => {
     </div>
   );
 };
+
 export default TableFilters;

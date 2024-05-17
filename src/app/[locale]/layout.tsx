@@ -20,13 +20,10 @@ export default async function LocaleLayout({
   children,
   params: { locale },
 }: LocaleLayoutProps) {
-  // Validate that the incoming `locale` parameter is a valid locale
   const isValidLocale = locales.some((cur) => cur === locale);
   if (!isValidLocale) {
     notFound();
   }
-
-  //unstable_setRequestLocale(locale);
 
   let messages;
   try {

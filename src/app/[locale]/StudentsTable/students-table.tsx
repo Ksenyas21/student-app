@@ -1,5 +1,4 @@
 import { DataTable } from "@/app/[locale]/StudentsTable/data-table";
-import { columns } from "@/app/[locale]/StudentsTable/columns";
 import { useState } from "react";
 import "../../styles/studentTable.scss";
 import MaxWidthWrapper from "@/shared/MaxWidthWrapper";
@@ -28,10 +27,11 @@ const StudentsTable = () => {
             </DialogContent>
           </Dialog>
 
-          <DataTable columns={columns} />
+          <DataTable />
         </div>
       </MaxWidthWrapper>
     </div>
   );
 };
+
 export default StudentsTable;

@@ -53,4 +53,5 @@ const StudentTableActions = ({ row }: { row: any }) => {
     </div>
   );
 };
+
 export default StudentTableActions;

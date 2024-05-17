@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import { makeServer } from "@/api/mirage-server";
 import StudentsTable from "@/app/[locale]/StudentsTable/students-table";
@@ -12,4 +13,5 @@ const MainPage = () => {
 
   return <StudentsTable />;
 };
+
 export default MainPage;

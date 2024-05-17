@@ -3,7 +3,6 @@ import { FetchDataResponse, StudentAttrs } from "@/app/types/students";
 import { createSelector } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import { dateFormat } from "@/lib/utils";
-import { date } from "zod";
 
 interface StudentsState {
   entities: StudentAttrs[];
@@ -17,12 +16,6 @@ interface StudentsState {
   searchByIdnp: string;
   startDate: string;
   endDate: string;
-}
-interface StudentsResponse {
-  students: StudentAttrs[];
-  page: number;
-  totalPages: number;
-  totalRecords: number;
 }
 
 interface ApiResponse {
@@ -51,8 +44,8 @@ export const selectFilteredStudents = createSelector(
         const birthday = dayjs(student.birthday).format(dateFormat);
         const start = startDate
           ? dayjs(startDate).format(dateFormat)
-          : new Date("1900-01-01"); // Use a default far in the past if no start date is given
-        const end = endDate ? dayjs(endDate).format(dateFormat) : new Date(); // Use current date if no end date is given
+          : new Date("1900-01-01");
+        const end = endDate ? dayjs(endDate).format(dateFormat) : new Date();
 
         return (
           (searchByName
@@ -63,11 +56,10 @@ export const selectFilteredStudents = createSelector(
           (endDate ? birthday <= end : true)
         );
       })
-      .sort((a, b) => a.name.localeCompare(b.name));
+      .sort((a: StudentAttrs, b: StudentAttrs) => a.name.localeCompare(b.name));
   },
 );
 
-// Async thunk for fetching students with pagination
 export const fetchStudents = createAsyncThunk<
   FetchDataResponse,
   { page: number; pageSize: number }
