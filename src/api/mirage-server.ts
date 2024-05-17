@@ -6,7 +6,7 @@ import { dateFormat } from "@/lib/utils";
 export function makeServer({ environment }: { environment: string }) {
   return createServer({
     models: {
-      student: Model,
+      student: Model.extend<Partial<StudentAttrs>>({}),
     },
 
     seeds(server) {
@@ -224,11 +224,9 @@ export function makeServer({ environment }: { environment: string }) {
         let totalStudents = studentModel.length;
 
         let end = page * pageSize;
-        end = end > totalStudents ? totalStudents : end; // Ensure 'end' does not exceed total number of students
+        end = end > totalStudents ? totalStudents : end;
 
-        // Slice the student model from the start up to the current page's end
         let students = studentModel.models.slice(0, end);
-        // Optional: You might want to return pagination info to the client
         return {
           students: students,
           page,

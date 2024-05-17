@@ -19,7 +19,11 @@ import dayjs from "dayjs";
 import { dateFormat } from "@/lib/utils";
 import { useTranslations } from "use-intl";
 
-const formSchema = (t: any) =>
+interface TranslationFunc {
+  (key: string): string;
+}
+
+const formSchema = (t: TranslationFunc) =>
   z.object({
     name: z.string().min(1, t("name.error")),
     birthday: z.date().or(
@@ -48,7 +52,6 @@ const StudentForm = ({ id, closeDialog }: FormProps) => {
     handleSubmit,
     watch,
     setValue,
-    reset,
     formState: { errors, isValid, isDirty },
   } = useForm<StudentAttrs>({
     defaultValues: {
@@ -92,7 +95,7 @@ const StudentForm = ({ id, closeDialog }: FormProps) => {
           initialValues[key as keyof StudentAttrs] !==
           formValues[key as keyof StudentAttrs]
         );
-      }) && !areFieldsEmpty; // Also ensure no fields are empty
+      }) && !areFieldsEmpty;
 
     setFormChanged(isChanged);
   }, [formValues, formChanged]);

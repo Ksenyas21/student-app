@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/lib/store";
 import dayjs from "dayjs";
 import StudentTableActions from "@/app/[locale]/StudentsTable/student-table-actions";
+import { StudentAttrs } from "@/app/types/students";
 
 export const DataTable = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -61,7 +62,7 @@ export const DataTable = () => {
         style={{ height: "400px", overflow: "auto" }}
         className="rounded-md border"
       >
-        {filteredStudents.map((student: any) => (
+        {filteredStudents.map((student: StudentAttrs) => (
           <div
             key={student.id}
             className={cn("flex items-center p-2 border-b hover:bg-gray-200", {

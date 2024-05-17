@@ -8,8 +8,9 @@ import * as React from "react";
 import { useState } from "react";
 import { AppDispatch } from "@/app/lib/store";
 import { useToast } from "@/components/ui/use-toast";
+import { StudentAttrs } from "@/app/types/students";
 
-const StudentTableActions = ({ row }: { row: any }) => {
+const StudentTableActions = ({ row }: { row: StudentAttrs }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { toast } = useToast();
   const [isOpened, setIsOpened] = useState(false);
