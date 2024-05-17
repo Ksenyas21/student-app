@@ -5,24 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Pencil2Icon, ResetIcon, TrashIcon } from "@radix-ui/react-icons";
 import StudentForm from "@/app/[locale]/StudentsTable/dialog/StudentForm";
 import * as React from "react";
-import { StudentAttrs } from "@/app/types/students";
-import { Row } from "@tanstack/table-core";
 import { useState } from "react";
 import { AppDispatch } from "@/app/lib/store";
 import { useToast } from "@/components/ui/use-toast";
 
-const StudentTableActions = ({ row }: { row: Row<StudentAttrs> }) => {
+const StudentTableActions = ({ row }: { row: any }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { toast } = useToast();
-  const studentId = row.getValue("id") as string;
   const [isOpened, setIsOpened] = useState(false);
-  const isActive = row.getValue("isActive");
+  const { id, isActive } = row;
 
   const toggleIsActive = (): void => {
     try {
-      dispatch(
-        updateStudent({ id: studentId, student: { isActive: !isActive } }),
-      );
+      dispatch(updateStudent({ id, student: { isActive: !isActive } }));
       toast({
         title: "Success",
         description: isActive ? "Student expelled" : "Student included",
@@ -45,7 +40,7 @@ const StudentTableActions = ({ row }: { row: Row<StudentAttrs> }) => {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
-          <StudentForm id={studentId} closeDialog={setIsOpened} />
+          <StudentForm id={id} closeDialog={setIsOpened} />
         </DialogContent>
       </Dialog>
       <Button variant="ghost" size="icon" onClick={toggleIsActive}>

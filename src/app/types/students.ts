@@ -7,3 +7,10 @@ export interface StudentAttrs {
   idnp: string;
   isActive: boolean;
 }
+
+export interface FetchDataResponse {
+  students: StudentAttrs[];
+  page: number;
+  totalPages: number;
+  totalRecords: number;
+}

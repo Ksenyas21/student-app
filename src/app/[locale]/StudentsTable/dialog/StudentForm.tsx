@@ -180,7 +180,7 @@ const StudentForm = ({ id, closeDialog }: FormProps) => {
             </DialogClose>
             <Button
               className="w-full"
-              disabled={!isDirty || !formChanged}
+              disabled={!isDirty || !isValid || !formChanged}
               type="submit"
             >
               {t("save-button")}
